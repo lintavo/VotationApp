@@ -1,0 +1,22 @@
+{
+	"tacos": {
+		"nombre": "Tacos al pastor",
+		"pais": "México",
+		"votos": 0
+	},
+	"paella": {
+		"nombre": "Paella Valenciana",
+		"pais": "España",
+		"votos": 0
+	},
+	"ceviche": {
+		"nombre": "Ceviche Peruano",
+		"pais": "Perú",
+		"votos": 0
+	},
+	"mangu": {
+		"nombre": "Mangú",
+		"pais": "República Dominicana",
+		"votos": 0
+	}
+}
