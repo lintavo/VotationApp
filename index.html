@@ -42,7 +42,7 @@
                 <div class="card-body text-center">
                   <h5 class="card-title">Tacos al pastor</h5>
                   <p class="card-text">México</p>
-                  <button id="tacos" type="button" class="btn btn-primary btn-lg position-relative">
+                  <button id="tacos" type="button" class="btn btn-primary btn-lg position-relative" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vota por los tacos">
                     Tacos <i class="bi bi-hand-thumbs-up"></i>
                     <span id="votos_tacos" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       0
@@ -56,7 +56,7 @@
               <div class="card-body text-center">
                 <h5 class="card-title">Paella Valenciana</h5>
                 <p class="card-text">España</p>
-                <button id="paella" type="button" class="btn btn-success btn-lg position-relative">
+                <button id="paella" type="button" class="btn btn-success btn-lg position-relative" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vota por la paella">
                   Paella <i class="bi bi-hand-thumbs-up"></i>
                   <span id="votos_paella" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     0
@@ -70,7 +70,7 @@
               <div class="card-body text-center">
                 <h5 class="card-title">Ceviche Peruano</h5>
                 <p class="card-text">Perú</p>
-                <button id="ceviche" type="button" class="btn btn-info btn-lg position-relative">
+                <button id="ceviche" type="button" class="btn btn-info btn-lg position-relative" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vota por el Ceviche">
                   Ceviche <i class="bi bi-hand-thumbs-up"></i>
                   <span id="votos_ceviche" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     0
@@ -84,7 +84,7 @@
             <div class="card-body text-center">
               <h5 class="card-title">Mangú</h5>
               <p class="card-text">República Dominicana</p>
-              <button id="mangu" type="button" class="btn btn-warning btn-lg position-relative">
+              <button id="mangu" type="button" class="btn btn-warning btn-lg position-relative" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vota por el Mangú">
                 Mangú <i class="bi bi-hand-thumbs-up"></i>
                 <span id="votos_mangu" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   0
@@ -126,5 +126,12 @@
         const analytics = getAnalytics(app);
       </script>
       <!-- <script src="firebase/fb.js"></script> -->
+      <!-- Tooltips -->
+      <script>
+        {
+          const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+          const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        }
+      </script>
 </body>
 </html>
