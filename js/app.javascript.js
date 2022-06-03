@@ -1,11 +1,6 @@
 var myFirebaseRef;
 var chart;
-var charData=[
-    ['tacos', 50],
-    ['paella', 41],
-    ['ceviche', 25],
-    ['mangu', 35]
-];
+var charData = [];
 var type = 'bar';
 
 $(document).ready(function() {
@@ -34,7 +29,6 @@ vote = function(){
         "votos": ++voteCount
     }, function(){
         $("#" + choice).prop("disabled", false);
-        //console.log('Se realizó un voto por ' + self);
         $("#chibi").prop("src", "img/" + self + ".png");
         $("#message").html('Gracias por tu voto');
         $("#msGracias").modal('show');
@@ -48,18 +42,26 @@ requestData = function(){
 
     myFirebaseRef.on("value", function(data) {
         total = 0;
+        charData = [];
         var comidas = data.val();
+        var arr;
         for(comida in comidas){
             $("#votos_" + comida + " i").text(comidas[comida].votos);
+            arr = [comida, comidas[comida].votos];// LLena arreglo con los datos de la base.
+            charData.push(arr);
 
             total += Number(comidas[comida].votos);
         }
 
         $("#total span").html(total);
+
+        chart.load({
+            columns: charData
+        });//Carga el gráfico con los datos obtenidos en el arreglo
     });
 };
 
-//Funciones para gráficos.
+//Funciones para gráficos atributos y comportamiento.
 addChart = function() {
     chart = c3.generate({
         bindto: "#chart",
