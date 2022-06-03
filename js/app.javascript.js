@@ -1,12 +1,18 @@
 var myFirebaseRef;
 var chart;
-var charData=[];
+var charData=[
+    ['tacos', 50],
+    ['paella', 41],
+    ['ceviche', 25],
+    ['mangu', 35]
+];
 
 
 $(document).ready(function() {
     myFirebaseRef = new Firebase("https://votationapp-1323f-default-rtdb.firebaseio.com");
     $('#ceviche, #tacos, #paella, #mangu').click(vote);
     requestData();
+    addChart();
 });
 
 vote = function(){
@@ -32,17 +38,65 @@ vote = function(){
 requestData = function(){
 
     var total;
+    var comida;
 
     myFirebaseRef.on("value", function(data) {
         total = 0;
         var comidas = data.val();
         for(comida in comidas){
-            //console.log(comida, comidas[comida].votos, comidas[comida]);
             $("#votos_" + comida + " i").text(comidas[comida].votos);
 
             total += Number(comidas[comida].votos);
         }
 
         $("#total span").html(total);
+    });
+};
+
+//Funciones para gráficos.
+addChart = function() {
+    chart = c3.generate({
+        bindto: "#chart",
+        data: {
+            type: 'donut',
+            columns: charData,
+            colors: {
+                tacos: '#0d6efd',
+                paella: '#198754',
+                ceviche: '#0dcaf0',
+                mangu: '#ffc107'
+            },
+            names: {
+                tacos: 'Tacos al pastor',
+                paella: 'Paella Valenciana',
+                ceviche: 'Ceviche Peruano',
+                mangu: 'Mangú'
+            }
+        },
+        bar: {
+            with: {
+                ratio: 1
+            }
+        },
+        tooltip: {
+            format: {
+                title: function(x) {
+                    return "Estado de la votación";
+                }
+            }
+        },
+        axis: {
+            rotated: true,
+            y: {
+                label: 'Cantidad de votos'
+            },
+            x: {
+                show: true,
+                label: 'platillos en votación'
+            }
+        },
+        donut: {
+            title: 'Platillos'
+        }
     });
 };
