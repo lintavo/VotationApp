@@ -6,14 +6,20 @@ var charData=[
     ['ceviche', 25],
     ['mangu', 35]
 ];
-
+var type = 'bar';
 
 $(document).ready(function() {
     myFirebaseRef = new Firebase("https://votationapp-1323f-default-rtdb.firebaseio.com");
     $('#ceviche, #tacos, #paella, #mangu').click(vote);
+    $('#bar, #pie, #donut').click(transformChart);
     requestData();
     addChart();
 });
+
+// Función para transformar el gráfico de las votaciones
+transformChart = function() {
+    chart.transform(this.id);
+};
 
 vote = function(){
     var choice = this.id;
@@ -58,7 +64,7 @@ addChart = function() {
     chart = c3.generate({
         bindto: "#chart",
         data: {
-            type: 'donut',
+            type: type,
             columns: charData,
             colors: {
                 tacos: '#0d6efd',
@@ -74,7 +80,7 @@ addChart = function() {
             }
         },
         bar: {
-            with: {
+            width: {
                 ratio: 1
             }
         },
