@@ -21,13 +21,14 @@ vote = function(){
     var voteCount = Number($("#votos_" + choice + ' i').text());
     var self = this.id;
 
-    console.log(voteCount);
+    $("#spinner").addClass('visible');
 
     $("#" + choice).prop("disabled", true);
 
     myFirebaseRef.child(choice).update({
         "votos": ++voteCount
     }, function(){
+        $("#spinner").addClass('invisible');
         $("#" + choice).prop("disabled", false);
         $("#chibi").prop("src", "img/" + self + ".png");
         $("#message").html('Gracias por tu voto');
@@ -39,6 +40,7 @@ requestData = function(){
 
     var total;
     var comida;
+    $("#spinner").addClass('visible');
 
     myFirebaseRef.on("value", function(data) {
         total = 0;
@@ -58,6 +60,7 @@ requestData = function(){
         chart.load({
             columns: charData
         });//Carga el gráfico con los datos obtenidos en el arreglo
+        $("#spinner").addClass('invisible');
     });
 };
 
